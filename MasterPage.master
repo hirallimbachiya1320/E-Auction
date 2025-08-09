@@ -1,0 +1,186 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Bid.com</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+<div class="main">
+  <div class="header">
+    <div class="header_resize">
+      <div class="logo">
+        <h1><a href="Home.aspx"><span><img src="images/logo.png" alt="" /></span></a><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/slogan1.png" width="329" height="79" alt=""  /></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><img src="images/slogan.png" width="229" height="79" alt=""  /></span></h1>
+      </div>
+      <div class="clr"></div>
+      <div class="searchform">
+        
+      </div>
+      <div class="menu_nav">
+        <ul>
+          <li><a href="Home.aspx"><span>Home</span></a></li>
+          <li><a href="CustomerLogin.aspx"><span>Customer Sign In</span></a></li>
+          <li><a href="CustomerRegister.aspx"><span>Registration</span></a></li>
+          <li><a href="AdminLogin.aspx"><span>Admin Sign In</span></a></li>
+          <li><a href="ContactUs.aspx"><span>Contact Us</span></a></li>
+           <li><a href="AboutUs.aspx"><span>About Us</span></a></li>
+        </ul>
+      </div>
+      <div class="clr"></div>
+      <div class="slider">
+        <div id="coin-slider"> <a href="#"><img src="images/eauction.png" width="960" height="320" alt="" /></a><br />
+         </div>
+        <div class="clr"></div>
+      </div>
+      <div class="clr"></div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="content_resize">
+      <div class="mainbar">
+        <div class="article">
+          <form id="form1" runat="server">
+    
+                <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+                </asp:ContentPlaceHolder>
+   
+            </form>
+          <div class="clr"></div>
+        </div>
+        
+      </div>
+      <div class="sidebar">
+        <div class="gadget">
+          
+           <h2 class="star"><span>Sub Category</span></h2>
+          <div class="clr"></div>
+            <asp:SqlDataSource ID="SqlDataSource3" runat="server" 
+                ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
+                
+                SelectCommand="SELECT Top 4 [SubCategoryName], [SubCategoryImage] FROM [SubCategoryt] ORDER BY RAND()">
+            </asp:SqlDataSource>
+            <asp:DataList ID="DataList2" runat="server"  CellPadding="2" 
+                  ForeColor="Black" DataSourceID="SqlDataSource3" 
+                  CellSpacing="2" Width="86%" RepeatColumns="2" >
+        <ItemTemplate>
+        <table>
+                
+                <tr>
+                    <td colspan="1">
+                        <asp:Label ID="productnameLabel" runat="server" Text='<%# Eval("SubCategoryName") %>' Font-Size="12px" ForeColor="White"/>
+                        
+                    </td>
+                    </tr>
+                    <tr>
+                    <td colspan="1">
+                        
+                        <asp:Image ID="Image1" runat="server" ImageUrl='<%#Eval("SubCategoryImage")%>' Width="110px" Height="110px"/>
+                    </td>
+                    </tr>
+                </tr>
+              
+            </table>
+            
+           
+               </ItemTemplate>
+        
+    </asp:DataList>
+        </div>
+        <div class="gadget">
+           <h2 class="star"><span>PRODUCTS</span></h2>
+          <div class="clr"></div>
+            <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
+                ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
+                SelectCommand="SELECT Top 4 [productname], [productimage] FROM [Productt] WHERE ([productstatus] = @productstatus) ORDER BY RAND()">
+                <SelectParameters>
+                    <asp:Parameter DefaultValue="Verified" Name="productstatus" Type="String" />
+                </SelectParameters>
+            </asp:SqlDataSource>
+             <asp:DataList ID="productlist" runat="server"  CellPadding="2" 
+                  ForeColor="Black" DataSourceID="SqlDataSource1" 
+                  CellSpacing="2" Width="86%" RepeatColumns="2" >
+        <ItemTemplate>
+         <table>
+                
+                <tr>
+                    <td colspan="1">
+                        <asp:Label ID="productnameLabel" runat="server" Text='<%# Eval("productname") %>' Font-Size="12px" ForeColor="White"/>
+                        
+                    </td>
+                    </tr>
+                    <tr>
+                    <td colspan="1">
+                        
+                        <asp:Image ID="Image1" runat="server" ImageUrl='<%#Eval("productimage")%>' Width="110px" Height="110px"/>
+                    </td>
+                    </tr>
+                </tr>
+              
+            </table>
+           
+               </ItemTemplate>
+        
+    </asp:DataList>
+        </div>
+      </div>
+      <div class="clr"></div>
+    </div>
+  </div>
+  <div class="fbg">
+    <div class="fbg_resize">
+      <div class="col c1">
+        <h2><span>Cate</span>gories</h2>
+       <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
+                ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
+                SelectCommand="SELECT TOP 6 [CategoryImage] FROM [Categoryt] ORDER BY RAND()">
+            </asp:SqlDataSource>
+         <asp:DataList ID="DataList1" runat="server"  CellPadding="2" 
+                  ForeColor="Black" DataSourceID="SqlDataSource2" 
+                  CellSpacing="2" Width="86%" RepeatColumns="3" >
+        <ItemTemplate>
+        <asp:Image ID="Image1" runat="server" ImageUrl='<%#Eval("CategoryImage")%>' Width="75px" Height="75px"/>
+           
+            <br />
+            
+           
+               </ItemTemplate>
+         </asp:DataList>
+        </div>
+      <div class="col c2">
+        <h2><span>Overview</span> </h2>
+        <p>India's Top Rated Bidding Platform Where Auctions Speak Louder</p>
+        <ul class="fbg_ul">
+          <li><a href="#">User Can be Customer.</a></li>
+		  <li><a href="#">User Can be Bidder.</a></li>
+		   <li><a href="#">Time based Auction.</a></li>
+          <li><a href="#">Highest Bidder Wins.</a></li>
+          <li><a href="#">Incremental Bid Value Used.</a></li>
+        </ul>
+      </div>
+      <div class="col c3">
+        <h2><span>Contact</span> Us</h2>
+        <p>Have a question or query. Feel free to reach us.</p>
+        <p class="contact_info"> <span>Address:</span> F-404/405, 4th Floor, Sai Heights, Bharuch - 392001, Gujarat.<br />
+          <span>Telephone:</span> 91-02642 - 2333444<br />
+          <span>FAX:</span> 91-02642 - 2333555<br />
+         
+          <span>E-mail:</span> <a href="#">support@bid.com</a> </p>
+      </div>
+      <div class="clr"></div>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="footer_resize">
+      <p class="lf">Copyright &copy; 2024-25 <a href="#">bid.com</a>.</p>
+      <p class="rf">Design by <a href="#">Hiral Limbachiya</a> </p>
+      <div style="clear:both;"></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+
